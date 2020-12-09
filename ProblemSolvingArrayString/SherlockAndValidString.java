@@ -2,46 +2,44 @@
   https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem         
  */
 package ProblemSolvingArrayString;
-
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class SherlockAndValidString {
-         public static String isValid (String s)
-    {
-        
-        char[] res;
-        res = s.toCharArray();
-        int[] r=new int[s.length()];
-        for(int i=0;i<s.length();i++){
-            for(int j=0;j<s.length();j++){
-                if(s.charAt(i)==s.charAt(j)){
-                    r[i]+=1;
-                }
-            }
-            
+public class SherlockAnsValidString {
+   
+  static String isValid(String s) {
+       final String YES = "YES";
+       final String NO = "NO";
+       if(s.isEmpty()){
+           return (NO);
+       }
+       if(s.length() <= 3){
+           return (YES);
+       }
+       int[] letters = new int[26];
+       for(int i=0 ; i < s.length() ; i++){
+           letters[ s.charAt(i) - 'a']++;
+       }
+       Arrays.sort(letters);
+       int i=0;
+       while( letters[i] == 0){
+          i++;
+       }
+       int min = letters[i];
+       int max = letters[25];
+       String temp = NO;
+        if(min == max){
+          temp = YES;
         }
-  
-      int max=maxfrequency(r);
-        for(int i=0;i<r.length;i++)
-        {
-            if(r[i]!=max)
-                return("NO");
+        else{
+           if(( (max-min==1) && (max>letters[24]) )||(min==1) && (letters[i+1]==max) ){
+                temp = YES;
+           }  
         }
-        
-        return("YES");
+        return(temp);
     }
-    public static int maxfrequency(int[] r){
-        int max=r[0];
-        for(int i=1;i<r.length;i++){
-            if(max<r[i])
-            {
-                max=r[i];
-            }
-        }
-        return(max);
-    }
-
+ 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
