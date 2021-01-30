@@ -1,0 +1,49 @@
+// https://www.hackerrank.com/challenges/queue-using-two-stacks 
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+public class Solution {
+    Stack<Integer> s1=new Stack<>();
+    Stack<Integer> s2=new Stack<>();
+    void enqueue(int x){
+        while(!s1.isEmpty()){
+         s2.push(s1.pop());
+        }
+        s1.push(x);
+        while(!s2.isEmpty()){
+            s1.push(s2.pop());
+        }
+    }
+    void dequeue(){
+        if(s1.isEmpty()){
+            return;
+        }
+        int data=s1.peek();
+        s1.pop();
+    }
+    int show(){
+        return s1.peek();
+    }
+    public static void main(String[] args) {
+        Solution s=new Solution();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            int choice=sc.nextInt();
+            if(choice==1){
+                s.enqueue(sc.nextInt());
+            }
+            else if(choice==2){
+                 s.dequeue();
+            }
+            else if(choice==3){
+                System.out.println(s.show());
+            }
+        } 
+        sc.close();         
+        }
+    }
+

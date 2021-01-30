@@ -1,0 +1,43 @@
+// https://www.hackerrank.com/challenges/simple-text-editor/problem
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        
+        Stack<String> st=new Stack<String>();
+        String s="";
+        st.push(s);
+        while(q!=0){
+        //for(int i=0;i<q;i++){
+            int t=sc.nextInt();
+            switch(t){
+                case 1:
+                s=s+(sc.next());
+                st.push(s);
+                break;
+            
+                case 2:
+               s=s.substring(0,s.length()-sc.nextInt());
+               st.push(s); 
+                break;
+                case 3:
+               System.out.println(s.charAt(sc.nextInt()-1));
+               break;
+                case 4:
+               st.pop();
+               s=st.peek(); 
+               break;           
+        }
+        q--;
+    }
+}
+}
+ 
